@@ -443,11 +443,21 @@
   }
   $('lineBtn').addEventListener('click', () => say(pick(lines)));
 
-  /* ---------- Music: songs built into the code, plus your own ---------- */
-  // To use a file from GitHub: put it in a /music folder and add a line like
-  //   { title: 'Our song', src: 'music/our-song.mp3' },
-  // (the first song in the list plays first). People can also upload or paste a link from the player.
+  /* ---------- MUSIC YOU CAN CHANGE ON GITHUB ---------- */
+  // 1) In your GitHub repository, create a folder named: music
+  // 2) Upload your MP3 file into that folder (example: music/our-song.mp3)
+  // 3) Add/edit a track below. The path is relative to this index.html file.
+  // 4) Commit the changes. GitHub Pages will publish the updated music.
+  //
+  // Example MP3 track:
+  // { title: 'Our song', src: 'music/our-song.mp3' },
+  //
+  // You can use multiple MP3 tracks; visitors can choose them in the music player.
+  // The three original generated instrumentals are kept below as optional tracks.
   const TRACKS = [
+    // Put your preferred MP3 track FIRST so it plays when the birthday page opens.
+    // { title: 'Our song', src: 'music/our-song.mp3' },
+
     { title: 'Golden Hour', bpm: 72, wave: 'triangle', pattern: [0,1,2,3,5,3,2,1],
       chords: [[57,60,64,67],[53,57,60,64],[48,52,55,59],[55,59,62,66]] },
     { title: 'Candlelight', bpm: 60, wave: 'sine', pattern: [0,2,1,3,2,5,3,1],
@@ -456,9 +466,27 @@
       melody: [[67,.75],[67,.25],[69,1],[67,1],[72,1],[71,2],[67,.75],[67,.25],[69,1],[67,1],[74,1],[72,2],
                [67,.75],[67,.25],[79,1],[76,1],[72,1],[71,1],[69,1],[77,.75],[77,.25],[76,1],[72,1],[74,1],[72,2]] }
   ];
+  // Remote playlist: change music.json on GitHub; no HTML edits needed.
+  // Tracks in music.json are inserted at the top of the player list.
   const LK = 'emmanuella-links', saved = [];
   try { saved.push(...JSON.parse(localStorage.getItem(LK) || '[]')); } catch (e) {}
   TRACKS.push(...saved);
+
+  // Load the shared playlist from the repository. If music.json is missing,
+  // the built-in instrumentals continue to work normally.
+  fetch('./music.json', { cache: 'no-cache' })
+    .then(r => r.ok ? r.json() : null)
+    .then(config => {
+      if (!config || !Array.isArray(config.tracks)) return;
+      const remoteTracks = config.tracks
+        .filter(t => t && typeof t.title === 'string' && typeof t.src === 'string')
+        .map(t => ({ title: t.title, src: t.src }));
+      if (!remoteTracks.length) return;
+      TRACKS.unshift(...remoteTracks);
+      renderList();
+      mtitle.textContent = TRACKS[ti]?.title || TRACKS[0].title;
+    })
+    .catch(() => console.log('Using built-in music; music.json could not be loaded.'));
 
   const bgm = $('bgm'), mus = $('music'), vol = $('vol'), mtitle = $('mtitle'), panel = $('mpanel');
   let ti = 0, fade, synthT = null, master, bus, cur, step = 0, nextT = 0, playing = false;
