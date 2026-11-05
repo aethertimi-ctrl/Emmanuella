@@ -8,7 +8,7 @@
 <title>Happy Birthday, Emmanuella</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=DM+Sans:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #1f1424;       /* deep aubergine */
@@ -51,7 +51,30 @@
     transition: opacity .9s ease, visibility .9s;
   }
   .gate.gone { opacity: 0; visibility: hidden; }
-  .gate p { font-family: var(--serif); font-style: italic; font-size: 1.35rem; color: var(--muted); }
+  .gate::before { content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 60% 42% at 50% 40%, rgba(138,63,102,.45), transparent 70%); }
+  .gate::after { content: ''; position: absolute; inset: 0; pointer-events: none; animation: twinkle 4s ease-in-out infinite alternate;
+    background: radial-gradient(1.5px 1.5px at 12% 22%, rgba(216,179,106,.9), transparent), radial-gradient(1.5px 1.5px at 84% 16%, rgba(216,179,106,.8), transparent),
+      radial-gradient(2px 2px at 70% 74%, rgba(216,179,106,.7), transparent), radial-gradient(1.5px 1.5px at 22% 80%, rgba(244,236,227,.8), transparent),
+      radial-gradient(1.5px 1.5px at 92% 52%, rgba(244,236,227,.7), transparent), radial-gradient(2px 2px at 6% 55%, rgba(216,179,106,.7), transparent); }
+  @keyframes twinkle { from { opacity: .25; } to { opacity: 1; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } }
+  .gate-in { position: relative; z-index: 1; display: grid; justify-items: center; gap: 14px; }
+  .g-pre { font-family: var(--serif); font-style: italic; font-size: clamp(1.05rem, 3.4vw, 1.3rem); letter-spacing: .08em; color: var(--muted); animation: fadeUp 1.2s .2s both; }
+  .g-name { font-family: 'Great Vibes', cursive; font-weight: 400; font-size: clamp(3.6rem, 17vw, 7.2rem); line-height: 1.1; white-space: nowrap;
+    margin: 4px 0 2px; filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); }
+  .g-name span { display: inline-block; padding: 0 .015em .14em;
+    background: linear-gradient(100deg, #a67c2e 20%, #fbeec6 45%, #a67c2e 70%) 0 0 / 300% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation-name: ink, sheen; animation-duration: 1.1s, 5s; animation-timing-function: cubic-bezier(.2,.8,.2,1), linear;
+    animation-delay: calc(.5s + var(--i) * .1s), calc(var(--i) * -.18s); animation-fill-mode: both, none; animation-iteration-count: 1, infinite; }
+  @keyframes ink { from { opacity: 0; transform: translateY(.3em) rotate(-4deg) scale(.9); filter: blur(10px); } }
+  @keyframes sheen { from { background-position: 100% 0; } to { background-position: -200% 0; } }
+  .g-orn { display: flex; align-items: center; gap: 14px; margin: 2px 0 10px; animation: fadeUp 1s 1.7s both; }
+  .g-orn span { width: 72px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+  .g-orn span:last-child { transform: scaleX(-1); }
+  .g-orn b { display: inline-block; color: var(--gold); font-weight: 400; animation: star 2.4s ease-in-out infinite alternate; }
+  @keyframes star { from { opacity: .4; transform: scale(.8) rotate(0); } to { opacity: 1; transform: scale(1.2) rotate(20deg); } }
   .seal {
     width: 112px; height: 112px; border-radius: 50%;
     border: 0;
@@ -64,7 +87,8 @@
   .seal:hover { transform: scale(1.06) rotate(-4deg); }
   .seal:active { transform: scale(.96); }
   @keyframes breathe { 50% { box-shadow: 0 14px 56px rgba(216,179,106,.28), inset 0 -6px 14px rgba(0,0,0,.28), inset 0 4px 8px rgba(255,255,255,.18); } }
-  .gate small { color: var(--muted); font-size: .9rem; }
+  .gate .seal { animation: fadeUp 1s 2.1s both, breathe 3s 3.1s ease-in-out infinite; }
+  .gate small { color: var(--muted); font-size: .9rem; animation: fadeUp 1s 2.6s both; }
 
   /* ---------- Layout ---------- */
   main { position: relative; z-index: 1; }
@@ -78,21 +102,25 @@
   body.opened .hero > :nth-child(3) { transition-delay: .5s; }
   body.opened .hero > :nth-child(4) { transition-delay: .8s; }
 
-  .hello { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.5rem, 5vw, 2.1rem); color: var(--gold); }
+  .hello { font-family: 'Great Vibes', cursive; font-weight: 400; font-size: clamp(2.4rem, 9vw, 3.6rem); line-height: 1.1; color: var(--ivory); }
   .nm {
-    font-family: var(--serif); font-style: italic; font-weight: 400;
-    font-size: clamp(3.6rem, 16vw, 7rem); line-height: 1.05; letter-spacing: -.03em;
-    background: none; border: 0; justify-self: center; margin-top: 6px; user-select: none; perspective: 700px;
+    font-family: 'Great Vibes', cursive; font-weight: 400;
+    font-size: clamp(4.6rem, 22vw, 9.5rem); line-height: 1.05;
+    background: none; border: 0; justify-self: center; margin: -4px 0 4px; user-select: none; perspective: 700px;
   }
   .nm span {
-    display: inline-block; padding: 0 .1em .08em;
+    display: inline-block; padding: .05em .2em .2em;
     background: linear-gradient(105deg, #a67c2e 15%, #f6e3b0 var(--mx, 50%), #a67c2e 85%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
     transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .15s ease-out;
     filter: drop-shadow(0 12px 20px rgba(0,0,0,.45));
   }
+  body.opened .nm span { animation: write 2.4s .7s cubic-bezier(.5,.1,.3,1) both; }
+  @keyframes write { from { clip-path: inset(-30% 100% -30% -30%); } to { clip-path: inset(-30% -30% -30% -30%); } }
   .nm:active span { transform: scale(.96); }
-  .tag { font-family: var(--serif); font-size: 1.25rem; color: var(--sage); margin-top: 14px; }
+  .tag { font-family: var(--serif); font-style: italic; font-size: 1.25rem; letter-spacing: .06em; color: var(--sage); margin-top: 10px; }
+  .tag::before, .tag::after { content: ''; display: inline-block; width: 36px; height: 1px; vertical-align: middle; margin: 0 14px; background: linear-gradient(90deg, transparent, var(--gold)); }
+  .tag::after { transform: scaleX(-1); }
   .scroll-cue {
     margin: 44px auto 0; width: 46px; height: 46px; border-radius: 50%;
     border: 1px solid rgba(216,179,106,.4); background: none; color: var(--gold); font-size: 1.1rem;
@@ -123,17 +151,23 @@
   .env:hover { transform: translateY(-4px) rotate(-1.5deg); }
   .env .body { position: absolute; inset: 0; border-radius: 8px; border: 1px solid rgba(216,179,106,.25);
     background: linear-gradient(160deg, #4a2d54, #34203d); box-shadow: 0 10px 24px rgba(0,0,0,.35); transition: border-color .3s; }
-  .env .body::before { content: ''; position: absolute; left: 10%; right: 10%; top: 14%; height: 60%; border-radius: 4px 4px 0 0; background: var(--ivory);
-    opacity: 0; transform: translateY(30%); transition: transform .6s .2s ease, opacity .3s .2s; }
-  .env.open .body::before { opacity: 1; transform: translateY(-22%); }
+  .env .paper { position: absolute; left: 8%; right: 8%; top: 10%; height: 78%; z-index: 1; padding: 9px 10px; overflow: hidden; text-align: left;
+    border-radius: 4px 4px 0 0; background: linear-gradient(#f8f1e8, #eadfd2); color: #3b2444; box-shadow: 0 -4px 12px rgba(0,0,0,.25);
+    font-family: 'Caveat', cursive; font-weight: 500; font-size: 1.08rem; line-height: 1.15;
+    opacity: 0; transform: translateY(40%); transition: transform .7s .25s cubic-bezier(.3,1.2,.4,1), opacity .3s .25s; }
+  .paper::after { content: ' ♥'; color: var(--mulberry); font-size: .8em; }
+  .env:nth-child(odd) { --rot: -1.5deg; } .env:nth-child(even) { --rot: 1.5deg; }
+  .env.open .paper { opacity: 1; transform: translateY(-30%) rotate(var(--rot)); }
+  .env .front { position: absolute; inset: 0; z-index: 2; border-radius: 0 0 8px 8px; background: linear-gradient(165deg, #56335f, #3a2244);
+    clip-path: polygon(0 36%, 50% 64%, 100% 36%, 100% 100%, 0 100%); }
   .env.on .body { border-color: var(--gold); }
-  .env .flap { position: absolute; left: 0; right: 0; top: 0; height: 58%; z-index: 2; clip-path: polygon(0 0, 100% 0, 50% 100%);
-    background: linear-gradient(#5d3868, #472a52); transform-origin: top; transition: transform .6s cubic-bezier(.4,.1,.2,1); }
-  .env.open .flap { transform: rotateX(180deg); }
-  .env i { position: absolute; left: 50%; top: 52%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; z-index: 3; transition: opacity .3s;
+  .env .flap { position: absolute; left: 0; right: 0; top: 0; height: 58%; z-index: 3; clip-path: polygon(0 0, 100% 0, 50% 100%);
+    background: linear-gradient(#5d3868, #472a52); transform-origin: top; transition: transform .6s cubic-bezier(.4,.1,.2,1), z-index 0s .25s; }
+  .env.open .flap { transform: rotateX(180deg); z-index: 0; }
+  .env i { position: absolute; left: 50%; top: 52%; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; z-index: 4; transition: opacity .3s;
     background: radial-gradient(circle at 35% 30%, #b45683, var(--mulberry)); box-shadow: 0 3px 6px rgba(0,0,0,.4); }
   .env.open i { opacity: 0; }
-  .env .lbl { position: absolute; left: 6px; right: 6px; bottom: 8px; z-index: 1; font-family: var(--serif); font-style: italic; font-size: .85rem; line-height: 1.2; color: var(--gold); }
+  .env .lbl { position: absolute; left: 6px; right: 6px; bottom: 8px; z-index: 4; font-family: var(--serif); font-style: italic; font-size: .85rem; line-height: 1.2; color: var(--gold); }
   .reveal { margin-top: 28px; min-height: 7em; display: grid; place-content: center; gap: 8px; background: rgba(255,255,255,.04);
     border: 1px dashed rgba(216,179,106,.35); border-radius: 20px; padding: 22px 26px;
     font-family: var(--serif); font-style: italic; font-size: clamp(1.1rem, 3vw, 1.35rem); line-height: 1.7; }
@@ -238,9 +272,34 @@
     *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
     html { scroll-behavior: auto; }
   }
+
+  /* ---------- Passcode screen ---------- */
+  .passcode-screen { position: fixed; inset: 0; z-index: 100; display: grid; place-content: center; justify-items: center; gap: 16px; padding: 24px; text-align: center; background: var(--ink); }
+  .passcode-screen::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 42% at 50% 40%, rgba(138,63,102,.45), transparent 70%); }
+  .passcode-content { position: relative; z-index: 1; width: min(100%, 340px); display: grid; justify-items: center; gap: 14px; }
+  .passcode-content h1 { font-family: var(--serif); font-weight: 400; color: var(--gold); font-size: 2rem; }
+  .passcode-content p { color: var(--muted); }
+  #passcodeInput { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(216,179,106,.5); background: rgba(255,255,255,.07); color: var(--ivory); text-align: center; font: inherit; font-size: 1.2rem; letter-spacing: .12em; }
+  #passcodeSubmit { padding: 12px 28px; border: 0; border-radius: 999px; background: var(--gold); color: var(--ink); font: inherit; font-weight: 600; }
+  #passcodeError { min-height: 1.5em; color: #f0a2ad; font-size: .9rem; }
+  .passcode-screen.unlocked { display: none; }
+
 </style>
 </head>
 <body class="locked">
+
+<div class="passcode-screen" id="passcodeScreen">
+  <div class="passcode-content">
+    <p class="g-pre">a little surprise is waiting</p>
+    <h1>Enter the passcode</h1>
+    <form id="passcodeForm">
+      <input id="passcodeInput" type="password" inputmode="text" autocomplete="off" placeholder="Enter passcode" aria-label="Passcode" required>
+      <button id="passcodeSubmit" type="submit">Unlock</button>
+    </form>
+    <p id="passcodeError" role="alert" aria-live="polite"></p>
+  </div>
+</div>
+
 
 <canvas id="fx" aria-hidden="true"></canvas>
 <div class="balloons" id="balloons"></div>
@@ -259,9 +318,13 @@
 </div>
 
 <div class="gate" id="gate">
-  <p>Something for you, Emmanuella.</p>
-  <button class="seal" id="open" aria-label="Open your birthday surprise">E</button>
-  <small>Tap the seal to open</small>
+  <div class="gate-in">
+    <p class="g-pre">a little something for</p>
+    <h2 class="g-name" id="gname">Emmanuella</h2>
+    <div class="g-orn" aria-hidden="true"><span></span><b>✦</b><span></span></div>
+    <button class="seal" id="open" aria-label="Open your birthday surprise">E</button>
+    <small>Tap the seal to open</small>
+  </div>
 </div>
 
 <main>
@@ -317,12 +380,12 @@
 <script>
   // ---- Edit your messages here ----
   const letters = [
-    { when: "you need a smile", text: "Think of the last time you laughed so hard you forgot what you were worried about. That’s the version of you I carry around. Go find her for a minute. She’s still here." },
-    { when: "you miss me", text: "Look up. Wherever you are, it’s the same sky, and I’m probably thinking about you. Distance is just a longer way of saying soon." },
-    { when: "you doubt yourself", text: "You show up as yourself, and that’s rare. The doubts are loud, but they have never once been right about you. Take your time. You’re doing better than you think." },
-    { when: "you can’t sleep", text: "Put the day down. Nothing needs solving tonight. Breathe slowly, and know that someone is quietly on your side." },
-    { when: "you’ve had a long day", text: "You’re allowed to rest. You’ve earned it many times over. Let your shoulders drop and let tonight be gentle." },
-    { when: "you need a reminder", text: "You make ordinary things feel considered. You choose kindness even when it costs something. The story is better with you in it." }
+    { when: "you need a smile", note: "Go find her. She’s still here.", text: "Think of the last time you laughed so hard you forgot what you were worried about. That’s the version of you I carry around. Go find her for a minute. She’s still here." },
+    { when: "you miss me", note: "Same sky. Always soon.", text: "Look up. Wherever you are, it’s the same sky, and I’m probably thinking about you. Distance is just a longer way of saying soon." },
+    { when: "you doubt yourself", note: "You’re doing better than you think.", text: "You show up as yourself, and that’s rare. The doubts are loud, but they have never once been right about you. Take your time. You’re doing better than you think." },
+    { when: "you can’t sleep", note: "Put the day down. I’m on your side.", text: "Put the day down. Nothing needs solving tonight. Breathe slowly, and know that someone is quietly on your side." },
+    { when: "you’ve had a long day", note: "Let tonight be gentle.", text: "You’re allowed to rest. You’ve earned it many times over. Let your shoulders drop and let tonight be gentle." },
+    { when: "you need a reminder", note: "The story is better with you in it.", text: "You make ordinary things feel considered. You choose kindness even when it costs something. The story is better with you in it." }
   ];
   const lines = [
     "You make the quiet parts of life feel intentional.",
@@ -343,8 +406,26 @@
   ];
 
   const $ = id => document.getElementById(id);
+  // Passcode gate: enter 11/11 to reveal the birthday seal.
+  $('passcodeForm').addEventListener('submit', event => {
+    event.preventDefault();
+    if ($('passcodeInput').value.trim() === '11/11') {
+      $('passcodeScreen').classList.add('unlocked');
+      $('passcodeInput').value = '';
+    } else {
+      $('passcodeError').textContent = 'That passcode isn’t correct. Try again.';
+      $('passcodeInput').select();
+    }
+  });
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'emmanuella-letters';
+
+  // Opening lettering: split the name into letters so each one "writes in"
+  (function () {
+    const g = $('gname'), t = g.textContent;
+    g.setAttribute('aria-label', t); g.textContent = '';
+    [...t].forEach((c, i) => { const sp = document.createElement('span'); sp.textContent = c; sp.setAttribute('aria-hidden', 'true'); sp.style.setProperty('--i', i); g.appendChild(sp); });
+  })();
 
   /* ---------- Particles: confetti, streamers, sparkles ---------- */
   const cv = $('fx'), cx = cv.getContext('2d');
@@ -413,8 +494,9 @@
   letters.forEach((l, i) => {
     const b = document.createElement('button');
     b.className = 'env' + (opened.has(i) ? ' open' : '');
-    b.innerHTML = '<span class="body"></span><span class="flap"></span><i></i><span class="lbl"></span>';
+    b.innerHTML = '<span class="body"></span><span class="paper"></span><span class="front"></span><span class="flap"></span><i></i><span class="lbl"></span>';
     b.querySelector('.lbl').textContent = l.when;
+    b.querySelector('.paper').textContent = l.note;
     b.addEventListener('click', () => {
       envs.querySelectorAll('.env').forEach(x => x.classList.remove('on'));
       b.classList.add('open', 'on');
