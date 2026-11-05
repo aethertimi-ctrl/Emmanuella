@@ -284,6 +284,22 @@
   #passcodeError { min-height: 1.5em; color: #f0a2ad; font-size: .9rem; }
   .passcode-screen.unlocked { display: none; }
 
+
+  /* ---------- Consistent centered interface ---------- */
+  body, body * { text-align: center; }
+  .letter, .letter p, .letter strong, .signoff,
+  .env .paper, .reveal, .reveal *, .note,
+  .mtitle, .trk, .mpanel, .mpanel * { text-align: center !important; }
+  .signoff { text-align: center !important; }
+  .music { left: 50%; right: auto; transform: translateX(-50%); }
+  .mpanel { left: 50%; right: auto; transform: translateX(-50%); }
+  .mlink { justify-content: center; }
+  .mlink input { text-align: center; }
+  .envs { justify-items: center; }
+  .env { width: 100%; max-width: 190px; }
+  section { margin-left: auto; margin-right: auto; }
+  input, textarea, select { text-align: center; }
+
 </style>
 </head>
 <body class="locked">
