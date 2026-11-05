@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#1f1424">
+<meta name="color-scheme" content="dark">
 <title>Happy Birthday, Emmanuella</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎂%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=DM+Sans:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -95,7 +97,7 @@
   section { max-width: 680px; margin: 0 auto; padding: 0 24px; }
 
   /* ---------- Hero ---------- */
-  .hero { min-height: 100svh; display: grid; place-content: center; text-align: center; padding-top: 40px; padding-bottom: 40px; }
+  .hero { min-height: 100vh; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr); place-content: center; text-align: center; padding-top: 40px; padding-bottom: 40px; }
   .hero > * { opacity: 0; transform: translateY(22px); transition: opacity 1s ease, transform 1s ease; }
   body.opened .hero > * { opacity: 1; transform: none; }
   body.opened .hero > :nth-child(2) { transition-delay: .25s; }
@@ -105,11 +107,11 @@
   .hello { font-family: 'Great Vibes', cursive; font-weight: 400; font-size: clamp(2.4rem, 9vw, 3.6rem); line-height: 1.1; color: var(--ivory); }
   .nm {
     font-family: 'Great Vibes', cursive; font-weight: 400;
-    font-size: clamp(4.6rem, 22vw, 9.5rem); line-height: 1.05;
+    font-size: clamp(3.6rem, 18vw, 9.5rem); line-height: 1.05; max-width: 100%;
     background: none; border: 0; justify-self: center; margin: -4px 0 4px; user-select: none; perspective: 700px;
   }
   .nm span {
-    display: inline-block; padding: .05em .2em .2em;
+    display: inline-block; padding: .05em .12em .2em;
     background: linear-gradient(105deg, #a67c2e 15%, #f6e3b0 var(--mx, 50%), #a67c2e 85%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
     transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .15s ease-out;
@@ -126,7 +128,9 @@
     border: 1px solid rgba(216,179,106,.4); background: none; color: var(--gold); font-size: 1.1rem;
     transition: background .3s, transform .3s;
   }
-  .scroll-cue:hover { background: rgba(216,179,106,.12); transform: translateY(3px); }
+  body.opened .hero > .scroll-cue { transition: background .3s, transform .3s; animation: cueIn 1s .8s ease backwards; }
+  body.opened .hero > .scroll-cue:hover { background: rgba(216,179,106,.12); transform: translateY(3px); }
+  @keyframes cueIn { from { opacity: 0; transform: translateY(22px); } }
 
   /* ---------- Letter ---------- */
   .letter-wrap { padding-top: 40px; padding-bottom: 90px; }
@@ -190,7 +194,7 @@
   .btn.ghost:hover { background: rgba(216,179,106,.12); transform: translateY(-2px); }
   .note { min-height: 3.2em; margin-top: 26px; font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: var(--sage); transition: opacity .4s; opacity: 0; }
   .note.on { opacity: 1; }
-  footer { text-align: center; padding: 30px 24px 50px; color: var(--muted); font-size: .85rem; position: relative; z-index: 1; opacity: .7; }
+  footer { text-align: center; padding: 30px 24px 100px; color: var(--muted); font-size: .85rem; position: relative; z-index: 1; opacity: .7; }
 
   /* letter reveal */
   .js .rv { opacity: 0; transform: translateY(14px); transition: opacity .9s ease, transform .9s ease; }
@@ -280,7 +284,7 @@
   .passcode-content h1 { font-family: var(--serif); font-weight: 400; color: var(--gold); font-size: 2rem; }
   .passcode-content p { color: var(--muted); }
   #passcodeInput { width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid rgba(216,179,106,.5); background: rgba(255,255,255,.07); color: var(--ivory); text-align: center; font: inherit; font-size: 1.2rem; letter-spacing: .12em; }
-  #passcodeSubmit { padding: 12px 28px; border: 0; border-radius: 999px; background: var(--gold); color: var(--ink); font: inherit; font-weight: 600; }
+  #passcodeSubmit { padding: 12px 28px; border: 0; border-radius: 999px; background: var(--gold); color: var(--ink); font: inherit; font-weight: 500; }
   #passcodeError { min-height: 1.5em; color: #f0a2ad; font-size: .9rem; }
   .passcode-screen.unlocked { display: none; }
 
@@ -291,7 +295,7 @@
   .env .paper, .reveal, .reveal *, .note,
   .mtitle, .trk, .mpanel, .mpanel * { text-align: center !important; }
   .signoff { text-align: center !important; }
-  .music { left: 50%; right: auto; transform: translateX(-50%); }
+  .music { left: 50%; right: auto; width: max-content; transform: translateX(-50%); }
   .mpanel { left: 50%; right: auto; transform: translateX(-50%); }
   .mlink { justify-content: center; }
   .mlink input { text-align: center; }
@@ -312,7 +316,7 @@
       <input id="passcodeInput" type="password" inputmode="text" autocomplete="off" placeholder="Enter passcode" aria-label="Passcode" required>
       <button id="passcodeSubmit" type="submit">Unlock</button>
     </form>
-    <p id="passcodeError" role="alert" aria-live="polite"></p>
+    <p id="passcodeError" role="alert"></p>
   </div>
 </div>
 
@@ -324,16 +328,16 @@
   <button class="mbtn" id="mbtn" aria-label="Play or pause music">▶</button>
   <button class="mnext" id="mnext" aria-label="Next song">⏭</button>
   <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <button class="mtitle" id="mtitle" aria-expanded="false" aria-controls="mpanel" aria-label="Choose a song"></button>
+  <button class="mtitle" id="mtitle" aria-expanded="false" aria-controls="mpanel" title="Choose a song"></button>
   <input type="range" id="vol" min="0" max="1" step=".05" value=".6" aria-label="Volume">
   <div class="mpanel" id="mpanel" hidden>
     <div id="mlist"></div>
-    <label class="mup">Upload a song from this device<input type="file" id="mfile" accept="audio/*" hidden></label>
+    <button type="button" class="mup" id="mupBtn">Upload a song from this device</button><input type="file" id="mfile" accept="audio/*" hidden>
     <div class="mlink"><input id="murl" placeholder="Paste an mp3 link" aria-label="Song link"><button id="madd">Add</button></div>
   </div>
 </div>
 
-<div class="gate" id="gate">
+<div class="gate" id="gate" inert>
   <div class="gate-in">
     <p class="g-pre">a little something for</p>
     <h2 class="g-name" id="gname">Emmanuella</h2>
@@ -343,7 +347,7 @@
   </div>
 </div>
 
-<main>
+<main inert>
   <section class="hero">
     <h1 class="hello">Happy Birthday</h1>
     <button class="nm" id="age" aria-label="Celebrate"><span id="num">Emmanuella</span></button>
@@ -353,12 +357,10 @@
 
   <section class="letter-wrap" id="letter">
     <article class="letter">
-      <p>Most days pass quietly. Then there are the ones that remind you someone else is carrying light with them, and the whole shape of the day shifts a little.</p>
-      <p>That’s what you do, Emmanuella. Not loudly. Just consistently. You walk into a moment and it becomes easier to be in it.</p>
-      <p><strong>Happy birthday.</strong> All those years of you figuring things out, choosing kindness when it cost something, and still showing up as yourself. I’m glad the world got this version of you.</p>
-      <p>I don’t have a perfect way to say what it means to have you around. You make ordinary things feel considered. You make the idea of another year feel like something worth looking forward to. That isn’t small.</p>
-      <p>Thank you for the way you love, for the space you take up in my life, and for being exactly who you are. I’ll keep being grateful for that — today and on the birthdays that come after this one.</p>
-      <p>Happy birthday again, My Main Character. The story is better with you in it.</p>
+      <p>Most days are quiet. Then you walk in and everything softens… my shoulders, the day, the way my heart sits in my chest. That’s you, Emmanuella. Not loud. Just the person I keep choosing. ❤️</p>
+      <p><strong>Happy birthday, my love.</strong> I’m glad you kept choosing kindness even when it cost you something, and that you still show up fully as yourself. You make ordinary moments feel held 💕</p>
+      <p>Thank you for the way you love me… steady, warm, and completely. For the space you take up in my life and in my heart. I don’t have better words than that.</p>
+      <p>Happy birthday again, My Main Character. The story’s better with you in it. And I love you more with every page. 💖</p>
       <div class="signoff">With all my love</div>
     </article>
   </section>
@@ -391,7 +393,7 @@
   </section>
 </main>
 
-<footer>Made just for you</footer>
+<footer inert>Made just for you</footer>
 
 <script>
   // ---- Edit your messages here ----
@@ -414,7 +416,7 @@
     "Happy birthday, My Main Character."
   ];
   const wishes = [
-    "May this year be softer on you than it is generous to you.",
+    "May this year be gentle with you and generous in all the ways you deserve.",
     "May the people and plans you choose this year choose you right back.",
     "May you get the rest, the joy and the good surprises you keep giving others.",
     "May this be the year you say yes to the thing that scares you a little.",
@@ -428,11 +430,14 @@
     if ($('passcodeInput').value.trim() === '11/11') {
       $('passcodeScreen').classList.add('unlocked');
       $('passcodeInput').value = '';
+      document.querySelectorAll('[inert]').forEach(el => el.removeAttribute('inert'));
+      $('open').focus({ preventScroll: true });
     } else {
       $('passcodeError').textContent = 'That passcode isn’t correct. Try again.';
       $('passcodeInput').select();
     }
   });
+  $('passcodeInput').focus();
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const KEY = 'emmanuella-letters';
 
@@ -530,10 +535,12 @@
   });
 
   /* ---------- Notes ---------- */
-  let last = -1, timer;
+  let timer;
+  const lastPick = new Map();   // remembers the last pick per list so lines and wishes don't interfere
   function pick(list) {
-    let i; do { i = Math.floor(Math.random() * list.length); } while (i === last && list.length > 1);
-    last = i; return list[i];
+    const prev = lastPick.has(list) ? lastPick.get(list) : -1;
+    let i; do { i = Math.floor(Math.random() * list.length); } while (i === prev && list.length > 1);
+    lastPick.set(list, i); return list[i];
   }
   function say(text, ms = 5000) {
     const n = $('note'); n.textContent = text; n.classList.add('on');
@@ -581,6 +588,7 @@
         .map(t => ({ title: t.title, src: t.src }));
       if (!remoteTracks.length) return;
       TRACKS.unshift(...remoteTracks);
+      if (playing) ti += remoteTracks.length;   // keep the current song highlighted if it already started
       renderList();
       mtitle.textContent = TRACKS[ti]?.title || TRACKS[0].title;
     })
@@ -595,7 +603,7 @@
     const a = getAC();
     master = a.createGain(); master.gain.value = 0; master.connect(a.destination);
     bus = a.createGain(); bus.connect(master);
-    const rv = a.createConvolver(), n = a.sampleRate * 2.2, buf = a.createBuffer(2, n, a.sampleRate);
+    const rv = a.createConvolver(), n = Math.round(a.sampleRate * 2.2), buf = a.createBuffer(2, n, a.sampleRate);
     for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 2.5); }
     const wet = a.createGain(); wet.gain.value = .35;
     rv.buffer = buf; bus.connect(rv); rv.connect(wet); wet.connect(master);
@@ -674,6 +682,7 @@
     clearInterval(fade); bgm.volume = +vol.value;
     if (master) master.gain.setTargetAtTime(+vol.value, ac.currentTime, .05);
   });
+  $('mupBtn').addEventListener('click', () => $('mfile').click());
   $('mfile').addEventListener('change', e => {
     const f = e.target.files[0]; if (!f) return;
     TRACKS.push({ title: f.name.replace(/\.[^.]+$/, ''), src: URL.createObjectURL(f) });
@@ -694,7 +703,7 @@
   function popSound() {
     try {
       ac = ac || new (window.AudioContext || window.webkitAudioContext)();
-      const len = ac.sampleRate * .12, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+      const len = Math.round(ac.sampleRate * .12), buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
       for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 3);
       const src = ac.createBufferSource(), g = ac.createGain(); g.gain.value = .5;
       src.buffer = buf; src.connect(g); g.connect(ac.destination); src.start();
@@ -722,11 +731,13 @@
   const cake = $('cake'), candles = [...document.querySelectorAll('.candle')], blowBtn = $('blowBtn');
   let mic = null;
   const allOut = () => candles.every(c => c.classList.contains('out'));
+  let wasDone = false;
   function check() {
     const done = allOut();
     cake.classList.toggle('lit', !done);
     blowBtn.textContent = done ? 'Light them again' : 'Blow out candles';
-    if (done) { stopMic(); setTimeout(() => { cannons(); say(pick(wishes), 9000); balloons(8); }, 450); }
+    if (done && !wasDone) { stopMic(); setTimeout(() => { cannons(); say(pick(wishes), 9000); balloons(8); }, 450); }   // celebrate once per blow-out
+    wasDone = done;
   }
   function blowOut() {
     const lit = candles.filter(c => !c.classList.contains('out'));
@@ -737,11 +748,14 @@
   blowBtn.addEventListener('click', () => { if (allOut()) { candles.forEach(c => c.classList.remove('out')); check(); } else blowOut(); });
   candles.forEach(c => c.addEventListener('click', () => { c.classList.toggle('out'); check(); }));
 
+  let listening = false;
   async function listen() {
     if (mic) { stopMic(); return; }
+    if (listening) return;
+    listening = true;
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
-      ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+      getAC();
       const an = ac.createAnalyser(); an.fftSize = 512;
       ac.createMediaStreamSource(stream).connect(an);
       const d = new Uint8Array(an.fftSize); let hold = 0;
@@ -757,6 +771,7 @@
         requestAnimationFrame(loop);
       })();
     } catch (e) { say('The microphone isn’t available here. Tap the candles instead.'); }
+    finally { listening = false; }
   }
   function stopMic(keepLean) {
     if (!mic) return;
@@ -766,7 +781,7 @@
   }
   $('micBtn').addEventListener('click', listen);
 
-  /* ---------- Pointer: sparkle trail + metallic 24 that follows you ---------- */
+  /* ---------- Pointer: sparkle trail + name that tilts toward you ---------- */
   const num = $('num'); let lastT = 0;
   addEventListener('pointermove', e => {
     const r = num.getBoundingClientRect();
